@@ -115,8 +115,8 @@ $$P_k = (1 - K_k) \cdot P_k^{-}$$
 
 | Estado | Condición | Comportamiento |
 |---|---|---|
-| **Camino despejado** | $\hat{d}_k > 0.12\ \text{m}$ | Avance en línea recta a $0.6 \times \text{MAX\_SPEED}$ |
-| **Evasión de obstáculo** | $\hat{d}_k \leq 0.12\ \text{m}$ | Giro de pivote invertido sobre su propio eje |
+| **Camino despejado** | $\hat{d}_k > 0.12$ m | Avance en línea recta a $0.6 \times$ MAX_SPEED |
+| **Evasión de obstáculo** | $\hat{d}_k \leq 0.12$ m | Giro de pivote invertido sobre su propio eje |
 
 > Al activarse la evasión, se gatilla un **temporizador de bloqueo de maniobra de 12 frames**. La dirección del giro se determina por la diferencia de lectura entre los sensores laterales.
 
@@ -126,21 +126,39 @@ $$P_k = (1 - K_k) \cdot P_k^{-}$$
 
 ### A. Escenario Simple (Obstáculos dispersos)
 
-- El robot mantiene **trayectorias lineales estables**.
-- El filtro de Kalman elimina exitosamente el ruido transitorio de las lecturas ópticas.
+El robot navega libremente entre obstáculos dispersos, manteniendo trayectorias lineales estables. El filtro de Kalman elimina exitosamente el ruido transitorio de las lecturas ópticas, evitando falsos positivos que podrían provocar giros innecesarios.
+
+![Gráfico Escenario Simple](grafico_escenario_simple.png)
+
+> *Distancia estimada por el filtro de Kalman vs. lectura cruda del sensor IR — Escenario Simple.*
 
 ### B. Escenario Complejo (Pasillo Confinado en S)
 
-- El robot ejecuta **giros consecutivos rápidos** en condiciones de confinamiento cerrado.
-- La fusión cinemática suaviza los retardos de la media móvil.
-- Evasión continua a **12 cm de las paredes** sin colisionar.
+En condiciones de confinamiento cerrado, el robot ejecuta giros consecutivos rápidos. La fusión cinemática suaviza los retardos propios de la media móvil, permitiendo una evasión continua y fluida a tan solo 12 cm de las paredes sin registrar ninguna colisión.
+
+![Gráfico Escenario Complejo](grafico_escenario_complejo.png)
+
+> *Distancia estimada por el filtro de Kalman vs. lectura cruda del sensor IR — Escenario Complejo (Pasillo en S).*
+
+### Resumen de métricas
+
+| Métrica | Escenario Simple | Escenario Complejo |
+|---|---|---|
+| Tasa de colisiones | 0% | 0% |
+| Distancia mínima a pared | ~12 cm | ~12 cm |
+| Comportamiento de giro | Estable | Giros consecutivos rápidos |
+| Estabilidad de trayectoria | Alta | Media-Alta |
 
 ---
 
 ## 10. Conclusiones
 
-La fusión sensorial mediante el Filtro de Kalman Escalar demostró alta robustez frente a la incertidumbre. Al coordinar los encoders con la señal infrarroja:
+El presente laboratorio demostró que la integración de técnicas de filtrado y fusión sensorial es fundamental para lograr una navegación reactiva confiable en entornos reales y simulados con ruido.
 
-- Se compensó la baja reflectancia de la madera
-- Se lograron trayectorias rectilíneas estables
-- **Tasa de colisiones: 0%** en ambos entornos simulados
+**Sobre el filtro de Media Móvil:** La ventana compacta de $N = 2$ resultó ser un balance eficiente entre la atenuación del ruido de alta frecuencia y el retraso introducido en la señal. Ventanas mayores, si bien reducen más el ruido, habrían comprometido la velocidad de respuesta ante obstáculos cercanos.
+
+**Sobre el Filtro de Kalman Escalar:** La elección de $Q = 0.02 > R = 0.01$ refleja una mayor confianza en el sensor infrarrojo que en el modelo dinámico puro, lo cual fue adecuado dado que la odometría acumula error con el tiempo. El filtro demostró compensar eficazmente la baja reflectancia de la madera, fusionando la predicción cinemática de los encoders con las lecturas ópticas para mantener una estimación de distancia coherente y estable.
+
+**Sobre la navegación reactiva:** El umbral de evasión a 12 cm y el bloqueo de maniobra de 12 frames probaron ser parámetros adecuados para ambos escenarios. En el pasillo en S, donde los estímulos sensoriales son continuos y simultáneos, el sistema evitó entrar en ciclos de oscilación gracias al temporizador de bloqueo, que garantiza la ejecución completa de cada maniobra de giro.
+
+**Resultado global:** Se obtuvo una **tasa de colisiones del 0%** en ambos entornos simulados, validando que la arquitectura de tres capas —calibración, filtrado/fusión y lógica reactiva— es una solución robusta para la navegación autónoma con sensores de bajo costo y alta incertidumbre.
