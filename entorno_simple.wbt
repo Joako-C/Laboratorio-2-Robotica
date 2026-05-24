@@ -1,0 +1,79 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  orientation -0.4099922843170798 0.4118168295325273 0.8138262871855639 1.584988913059942
+  position -0.05528012262517484 -1.2493517940753782 1.7127416921876015
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -2.7755575615628914e-17
+  floorSize 2 2
+}
+WoodenBox {
+  translation -0.267566 -0.610036 0.05
+  rotation 0 0 1 0.5
+  name "wooden box(7)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.536564 0.545702 0.05
+  rotation 0 0 1 0.5
+  name "wooden box(5)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation 0.287831 0.368902 0.05
+  rotation 0 0 1 0.5
+  name "wooden box(6)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation 0.747728 0.168081 0.05
+  rotation 0 0 1 0.5
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation 0.440225 -0.182881 0.05
+  rotation 0 0 1 0.5
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.417058 -0.0137635 0.05
+  rotation 0 0 1 4.96782
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation 0.534275 -0.693822 0.05
+  rotation 0.6875198235270905 0.23373994000352302 0.6875188235273472 -2.682365307179586
+  name "wooden box(3)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -5.09732 -37.3938 -0.55
+  rotation 3.67604e-09 9.58981e-09 -1 -2.4094853071795863
+  name "wooden box(4)"
+  size 0.1 0.1 0.1
+}
+E-puck {
+  translation 0.25529326525261 0.09060518398566746 -6.396009353125398e-05
+  rotation -0.00018200398556649533 -0.00035423297190817976 -0.9999999206967723 0.950482
+  controller "e-puck"
+}
