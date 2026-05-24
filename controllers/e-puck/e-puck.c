@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
     if (evasive_maneuver_timer > 0) {
         evasive_maneuver_timer--;
     } else {
-        if (d_estimated > UMBRAL_SEGURIDAD) {a
+        if (d_estimated > UMBRAL_SEGURIDAD) {
           current_left_speed = MAX_SPEED * 0.4;
           current_right_speed = MAX_SPEED * 0.4;
         } else {
