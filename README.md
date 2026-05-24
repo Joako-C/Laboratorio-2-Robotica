@@ -145,9 +145,10 @@ En condiciones de confinamiento cerrado, el robot ejecuta giros consecutivos rá
 | Métrica | Escenario Simple | Escenario Complejo |
 |---|---|---|
 | Tasa de colisiones | 0% | 0% |
-| Distancia mínima a pared | ~12 cm | ~12 cm |
-| Comportamiento de giro | Estable | Giros consecutivos rápidos |
-| Estabilidad de trayectoria | Alta | Media-Alta |
+| Distancia mínima estimada (Kalman) | ~12.5 cm | ~4 cm |
+| Muestras registradas | ~13 iteraciones | ~42 iteraciones |
+| Activaciones de evasión | 2 | Continua (~iter. 10–35) |
+| Variación señal cruda | ~0.13–0.30 m | ~0.04–0.30 m |
 
 ---
 
