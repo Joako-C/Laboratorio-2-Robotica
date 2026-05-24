@@ -115,10 +115,10 @@ $$P_k = (1 - K_k) \cdot P_k^{-}$$
 
 | Estado | Condición | Comportamiento |
 |---|---|---|
-| **Camino despejado** | $\hat{d}_k > 0.12$ m | Avance en línea recta a $0.6 \times$ MAX_SPEED |
-| **Evasión de obstáculo** | $\hat{d}_k \leq 0.12$ m | Giro de pivote invertido sobre su propio eje |
+| **Camino despejado** | $\hat{d}_k > 0.14$ m | Avance en línea recta a $0.4 \times$ MAX_SPEED |
+| **Evasión de obstáculo** | $\hat{d}_k \leq 0.14$ m | Giro de pivote invertido sobre su propio eje |
 
-> Al activarse la evasión, se gatilla un **temporizador de bloqueo de maniobra de 12 frames**. La dirección del giro se determina por la diferencia de lectura entre los sensores laterales.
+> Al activarse la evasión, se gatilla un **temporizador de bloqueo de maniobra de 15 frames**. La dirección del giro se determina por la diferencia de lectura entre los sensores laterales.
 
 ---
 
@@ -134,7 +134,7 @@ El robot navega libremente entre obstáculos dispersos, manteniendo trayectorias
 
 ### B. Escenario Complejo (Pasillo Confinado en S)
 
-En condiciones de confinamiento cerrado, el robot ejecuta giros consecutivos rápidos. La fusión cinemática suaviza los retardos propios de la media móvil, permitiendo una evasión continua y fluida a tan solo 12 cm de las paredes sin registrar ninguna colisión.
+En condiciones de confinamiento cerrado, el robot ejecuta giros consecutivos rápidos. La fusión cinemática suaviza los retardos propios de la media móvil, permitiendo una evasión continua y fluida a tan solo 14 cm de las paredes sin registrar ninguna colisión.
 
 ![Gráfico Escenario Complejo](grafico_escenario_complejo.png)
 
@@ -154,12 +154,4 @@ En condiciones de confinamiento cerrado, el robot ejecuta giros consecutivos rá
 
 ## 10. Conclusiones
 
-El presente laboratorio demostró que la integración de técnicas de filtrado y fusión sensorial es fundamental para lograr una navegación reactiva confiable en entornos reales y simulados con ruido.
-
-**Sobre el filtro de Media Móvil:** La ventana compacta de $N = 2$ resultó ser un balance eficiente entre la atenuación del ruido de alta frecuencia y el retraso introducido en la señal. Ventanas mayores, si bien reducen más el ruido, habrían comprometido la velocidad de respuesta ante obstáculos cercanos.
-
-**Sobre el Filtro de Kalman Escalar:** La elección de $Q = 0.02 > R = 0.01$ refleja una mayor confianza en el sensor infrarrojo que en el modelo dinámico puro, lo cual fue adecuado dado que la odometría acumula error con el tiempo. El filtro demostró compensar eficazmente la baja reflectancia de la madera, fusionando la predicción cinemática de los encoders con las lecturas ópticas para mantener una estimación de distancia coherente y estable.
-
-**Sobre la navegación reactiva:** El umbral de evasión a 12 cm y el bloqueo de maniobra de 12 frames probaron ser parámetros adecuados para ambos escenarios. En el pasillo en S, donde los estímulos sensoriales son continuos y simultáneos, el sistema evitó entrar en ciclos de oscilación gracias al temporizador de bloqueo, que garantiza la ejecución completa de cada maniobra de giro.
-
-**Resultado global:** Se obtuvo una **tasa de colisiones del 0%** en ambos entornos simulados, validando que la arquitectura de tres capas —calibración, filtrado/fusión y lógica reactiva— es una solución robusta para la navegación autónoma con sensores de bajo costo y alta incertidumbre.
+La arquitectura de tres capas —calibración, filtrado/fusión y lógica reactiva— demostró ser una solución robusta para la navegación autónoma con sensores de bajo costo y alta incertidumbre. La ventana compacta de $N = 2$ en la media móvil equilibró eficientemente la atenuación de ruido y el retraso de respuesta, mientras que el Filtro de Kalman Escalar, con $Q = 0.02$ y $R = 0.01$, compensó eficazmente la baja reflectancia de la madera fusionando la predicción odométrica con las lecturas ópticas. El umbral de evasión a 14 cm y el temporizador de 15 frames evitaron ciclos de oscilación incluso en el pasillo confinado en S, donde los estímulos son continuos. El resultado fue una **tasa de colisiones del 0%** en ambos escenarios, validando que la fusión sensorial es indispensable cuando se opera con sensores IR de rango limitado en entornos complejos.
