@@ -1,4 +1,4 @@
-# Laboratorio 2: Navegación Reactiva con Filtrado y Fusión de Sensores en Webots
+# Laboratorio 2: Robotica y Sistemas Autonomos
 
 ## Integrantes
 - Joaquín Castro
